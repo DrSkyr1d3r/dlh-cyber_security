@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# script to run infinitely
 while true
 do
   echo 'I am alive!' >> /tmp/my_process

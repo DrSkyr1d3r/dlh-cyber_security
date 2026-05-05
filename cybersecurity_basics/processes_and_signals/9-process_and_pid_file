@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# infinite printing script with trapping sigterm
+echo $$ > /tmp/myscript.pid
+trap 'echo "I hate the kill command"; rm /tmp/myscript.pid; trap - SIGTERM; kill -SIGTERM $$' SIGTERM
+trap "echo 'Y U no love me?!'" SIGINT
+trap 'rm /tmp/myscript.pid; trap - SIGQUIT; kill -SIGQUIT $$' SIGQUIT
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+done

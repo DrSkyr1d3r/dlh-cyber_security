@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script to grep processes with bash 
+ps auxf | grep 'bash'
+

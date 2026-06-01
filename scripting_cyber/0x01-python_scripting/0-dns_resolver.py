@@ -13,7 +13,7 @@ def resolve_domain_to_ipv4(domain_name):
         str: IP address or None
     """
     try:
-        return socket.gethostbyname(domain)
+        return socket.gethostbyname(domain_name)
     except socket.gaierror:
         return None
     except Exception as e:

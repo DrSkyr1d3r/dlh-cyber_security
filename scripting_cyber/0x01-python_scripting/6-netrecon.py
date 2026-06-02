@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import requests
 import socket
-import dns.resolver
+try:
+    import dns.resolver
+except ModuleNotFoundError:
+    dns = None
 from bs4 import BeautifulSoup
 
 
@@ -19,6 +22,9 @@ def dns_recon(domain):
     try:
         ip = socket.gethostbyname(domain)
         print(f"IP Address: {ip}")
+        if dns is None:
+            print("dnspython not installed")
+            return
         mx = dns.resolver.resolve(domain, "MX")
         print(f"MX Records:")
         for item in mx:

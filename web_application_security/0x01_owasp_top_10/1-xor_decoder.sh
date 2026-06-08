@@ -34,4 +34,3 @@ do
 	printf "%b" "\\$octal"
 	i=$((i + 1))
 done
-echo

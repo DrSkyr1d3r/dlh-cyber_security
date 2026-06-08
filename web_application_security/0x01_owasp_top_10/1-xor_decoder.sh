@@ -7,7 +7,7 @@ while [ "$i" -lt "${#mask}" ]
 do
 	char="${mask:i:1}"
 	ascii=$(printf "%d" "'$char")
-	val=$((ascii ^ key))
+	val=$((ascii + key - 2 * (ascii & key)))
 	octal=$(printf '%03o' "$val")
 	printf "\\$octal"
 	i=$((i + 1))

@@ -1,9 +1,15 @@
 #!/bin/bash
 mask=$(echo "${1#\{xor\}}" | base64 -d)
 key=$(printf "%d" "'_")
-for ((i=0; i<${#mask}; i++)); do
+i=0
+
+while [ "$i" -lt "${#mask}" ]
+do
 	char="${mask:i:1}"
 	ascii=$(printf "%d" "'$char")
-	val=$((ascii^key))
-	printf "\\$(printf '%03o' "$val")"
+	val=$((ascii ^ key))
+	octal=$(printf '%03o' "$val")
+	printf "\\$octal"
+	i=$((i + 1))
 done
+echo

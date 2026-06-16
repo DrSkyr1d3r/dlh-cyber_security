@@ -31,3 +31,32 @@ Organization can integrate vulnerability management system with CVE databases. T
 
 # 4. Calculate CVSS
 ## Calculate the CVSS base score for this vulnerability and determine its severity level
+### CVSS Base Metrics
+Attack Vector (AV): Network
+Attack Complexity (AC): Low
+Privileges Required (PR): None
+User Interaction (UI): None
+Scope (S): Unchanged
+Confidentiality (C): High
+Integrity (I): High
+Availability (A): High
+### Base metric Score
+9.8 Critical
+### Implications
+The vulnerability is extremely seriousa and the severity is Critical. An attacker could remotely execute arbitrary code on the affected server, potentially leading to full system compromise, data theft, service disruption, or further attacks inside the organization’s network.
+### Mitigation Strategy
+Since the vulnerability is rated Critical, the organization should treat it as an urgent security risk. The affected systems should be identified immediately, and available patches or security updates should be applied as soon as possible. If patching cannot be done immediately, temporary mitigations such as disabling the vulnerable service. The organization should also monitor logs and alerts for signs of exploitation, prioritize incident response activities, and verify that remediation was successful through vulnerability scanning or retesting. Critical CVEs should be handled with the highest priority because they can have serious impacts on confidentiality, integrity, and availability.
+
+# 5. CWE and CVE Difference
+## What is CWE, and how does it differ from CVE?
+Common Weakness Enumeration (CWE) categorizes the underlying software weaknesses. CVE on the otherhand track specific real world vulnerability that results from those weaknesses.
+
+## Why are both important in cybersecurity?
+CWE helps developers proactively avoid or fix the weaknesses before they turn into vulnerabilities. Meanwhile, CVE help security teams find, track and remediate vulnerabilities. Together, they offer both prevention and response.
+
+# 6. Role of CWE
+## Describe the role of CWE in secure software development practices.
+CWE underpins secure software development. It acts as a guide for developers, highlighting common coding weaknesses. By referencing CWE, development teams can adopt secure coding practices, detect known weakness patterns and prevent vulnerabilites. 
+
+## How can developers leverage CWE to improve code quality and security?
+CWE gives developers a catalog of known weakness types. By referencing it during design, code review, and testing, developers can proactively identify and mitigate those weaknesses. This results in a secure code and reduces future vulnerabilities.

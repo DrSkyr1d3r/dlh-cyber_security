@@ -60,3 +60,64 @@ CWE underpins secure software development. It acts as a guide for developers, hi
 
 ## How can developers leverage CWE to improve code quality and security?
 CWE gives developers a catalog of known weakness types. By referencing it during design, code review, and testing, developers can proactively identify and mitigate those weaknesses. This results in a secure code and reduces future vulnerabilities.
+
+# 7. Common CWEs
+## Provide examples of common CWEs and their potential impact on software security.
+Improper input validation like allowing SQL injection, can lead to data breaches. Improper Access control like missing authentication can expose sensitive systems. Buffer overflows can allow attackers to execute malicious code. 
+
+## How would you prioritize addressing these weaknesses in a software development project?
+Prioritize based on risk and ease of remediation. Start with those that lead to critical vulnerabilities like SQLi and then address weaknesses related to access control, ensuring proper authenticatin and authorization. Finally, tackle issues like buffer overflows. 
+
+# 8. CWE taxonomy
+## Explain how CWE taxonomy helps in vulnerability assessment and risk management.
+CWE taxanomy helps by breaking down software weaknesses into clearly defined categorites. This structure allows security teams to recognize patterns of weakness across projects. It also helps in risk management, as teams can assess whether thier code is vulnerable to common, high-impact weaknesses and mitigate them early on. 
+
+## What are the benefits of using a standardized classification system like CWE
+Standardized classification help create a common language. The benefit is that everyone works from the same understanding which leads to better communication, quicker identification of issues, and more consistent fixes. 
+
+# 9. Relationship between CWE, CVE, and CVSS
+## Discuss the relationship between CWE, CVE, and CVSS.
+CWE highlight the weaknesses. CVE tracks realworld vulnerabilities that stem from those weaknesses. CVSS then provides a severity score for each CVE.
+
+## How can these frameworks work together to enhance an organization's vulnerability management strategy?
+They complement eachother naturally. We begin with CWE to identify and avoid common coding weaknesses in the development. When weaknesses slip through and become vulnerabilities, CVE helps catalog and track the,. CVSS scores help orgaization prioritize remediation efforts. 
+
+# 10. Understanding a Vulnerability
+## Vulnerability CVE-2021-34527
+### CVE-2021-34527 (PrintNightmare) Summary
+CVE-2021-34527, also known as PrintNightmare, is a Remote Code Execution (RCE) vulnerability affecting the Windows Print Spooler service. An attacker who successfully exploits this vulnerability can execute arbitrary code with SYSTEM privileges, allowing them to install programs, modify or delete data, and create new accounts with full privileges.
+### Severity
+8.8 high
+### Mitigation
+Organizations should apply the security updates provided by Microsoft as soon as possible. Additional mitigation measures include disabling the Print Spooler service on systems where it is not required, restricting printer driver installation permissions, and monitoring systems for suspicious activity.
+
+PrintNightmare demonstrates how a flaw in a widely used system service can allow attackers to gain complete control of affected machines. Prompt patching and proper system hardening are essential to reduce the risk of exploitation.
+
+# 11. Analyzing Vulnerability Trends
+## Linux Kernel Vulnerability Trend Analysis (2026)
+### Q1 (January – March 2026)
+Vulnerabilities found: 652
+### Q2 (April – June 2026)
+Vulnerabilities found: 1523
+### Observed Trends
+The data indicates a substantial increase in reported Linux kernel vulnerabilities during Q2 by approximately 133.6% from Q1 to Q2. This may be due to increased security research, vulnerability disclosures, code audits, or the discovery of weaknesses in additional kernel subsystems and device drivers. Many Linux kernel vulnerabilities are related to memory management issues, privilege escalation, race conditions, information disclosure, and denial-of-service attacks.
+
+Organizations using Linux systems should continuously monitor vulnerability disclosures, perform regular vulnerability assessments, and apply security patches promptly to reduce security risks.
+
+# 12. Identify CWEs
+## CWE Classification for the Code Snippet
+The code contains a SQL Injection weakness because the SQL query is built by directly concatenating user input into the query string.
+### Identified CWE
+CWE-89: Improper Neutralization of Special Elements used in an SQL Command (SQL Injection). This CWE occurs when user-controlled input is inserted directly into an SQL query without proper validation, sanitization, or parameterization.
+### Security Implications
+An attacker could provide a malicious username value that changes the meaning of the SQL query. This may cause the query to return unintended records. In more serious cases, SQL injection could allow attackers to bypass authentication, read sensitive user data, modify database records, or delete data.
+### Attack Scenario
+Attacker could manipulate the username parameter to access another user’s information or retrieve data from the database without authorization.
+### Recommended Mitigation
+The code should use parameterized queries instead of string concatenation. Additional security controls include validating input, applying least privilege to the database account, limiting database permissions, and logging suspicious query attempts.
+
+Suggested code modification
+`
+  query = "SELECT * FROM users WHERE username = ?;"
+  cursor.execute(query, (username,))
+`

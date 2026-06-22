@@ -48,3 +48,9 @@ Exposure of sensitive data, unauthorized modification of orders, data exfiltrati
 Principle of least privilege, role-based access control (RBAC), server-side authorization checks, regular security patching, and input validation.
 
 # What trust boundaries exist in this system? Describe at least three.
+## Browser / React Frontend → Backend API
+This is a trust boundary because data moves from the user-controlled browser into the backend system. The frontend cannot be trusted because users can modify requests using browser developer tools, Burp Suite, or scripts. Therefore, the backend must validate all input, check authentication, and enforce authorization.
+## Backend API → PostgreSQL Database
+This is a trust boundary because data moves from the application layer into the protected database layer. The database stores sensitive information such as users, orders, and payment-related records. The backend should only send validated queries, use parameterized statements, and access the database with least-privilege permissions.
+## Backend API → Stripe Payment Service
+This is a trust boundary because the system communicates with an external third-party payment provider. Payment requests and responses leave the e-commerce system and cross into Stripe’s environment. Communication must use HTTPS, API authentication, and Stripe webhook/signature verification before marking payments as successful.

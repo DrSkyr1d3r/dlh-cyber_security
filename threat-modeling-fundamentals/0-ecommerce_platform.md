@@ -47,10 +47,39 @@ Exposure of sensitive data, unauthorized modification of orders, data exfiltrati
 ### Mitigation:
 Principle of least privilege, role-based access control (RBAC), server-side authorization checks, regular security patching, and input validation.
 
-# What trust boundaries exist in this system? Describe at least three.
+# 2. What trust boundaries exist in this system? Describe at least three.
 ## Browser / React Frontend → Backend API
 This is a trust boundary because data moves from the user-controlled browser into the backend system. The frontend cannot be trusted because users can modify requests using browser developer tools, Burp Suite, or scripts. Therefore, the backend must validate all input, check authentication, and enforce authorization.
 ## Backend API → PostgreSQL Database
 This is a trust boundary because data moves from the application layer into the protected database layer. The database stores sensitive information such as users, orders, and payment-related records. The backend should only send validated queries, use parameterized statements, and access the database with least-privilege permissions.
 ## Backend API → Stripe Payment Service
 This is a trust boundary because the system communicates with an external third-party payment provider. Payment requests and responses leave the e-commerce system and cross into Stripe’s environment. Communication must use HTTPS, API authentication, and Stripe webhook/signature verification before marking payments as successful.
+
+# 3. For DREAD scoring: Consider how easy it is to find the search functionality and how many users would be affected by a data breach
+## Damage Potential = 9
+### Justification:
+A successful SQL injection could allow an attacker to access, modify, or delete sensitive data such as customer information, order records, and potentially payment-related data. This could result in major financial and reputational damage.
+## Reproducibility = 10
+### Justification:
+Once the vulnerable search query is discovered, the attack can be repeated consistently with the same malicious input.
+## Exploitability = 9
+### Justification:
+SQL injection can often be exploited using common tools such as Burp Suite or SQLmap and does not necessarily require advanced skills if the vulnerability exists.
+## Affected Users = 10
+### Justification:
+A compromise of the database could expose information belonging to all customers and affect the entire platform.
+## Discoverability = 8
+### Justification:
+The search functionality is publicly accessible and easy to locate. However, discovering that it is specifically vulnerable to SQL injection may require testing and analysis, so it is not a perfect 10.
+
+Damage Potential = 9
+Reproducibility = 10
+Exploitability = 9
+Affected Users = 10
+Discoverability = 8
+
+Total = 46
+
+DREAD Score = 46 / 5 = 9.2
+
+Risk Level = Critical
